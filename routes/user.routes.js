@@ -1,10 +1,9 @@
 const router = require("express").Router();
-const mongoose = require("mongoose");
 const User = require('../model/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = "FTF(W@X!kQL?X28Pj'q;Qgn`uS!Ewv2*92`&L&N^+F5ZK[.][sqj)D,&HJAd}QKCapcjUHkx_tedGqK,g;nsB(w~B"
+const JWT_SECRET = ""
 
 router.post('/register', async (req, res) => {
   const { username, password: plainTextPassword } = req.body
