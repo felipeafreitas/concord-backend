@@ -10,6 +10,6 @@ app.use(bodyParser.json())
 const userRouter = require("./routes/user.routes");
 app.use("/", userRouter);
 
-app.listen(9999, () => {
-  console.log('Server up at 9999')
+app.listen(process.env.PORT || 9999, () => {
+  console.log(`Server up at ${process.env.PORT || 9999}`)
 })
