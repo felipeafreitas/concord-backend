@@ -3,13 +3,11 @@ const User = require('../model/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = ""
-
 router.post('/register', async (req, res) => {
-  const { username, password: plainTextPassword } = req.body
+  const { email, password: plainTextPassword, name } = req.body
 
-  if (!username || typeof username !== 'string') {
-    return res.json({ status: 'error', error: 'Invalid username'})
+  if (!email || typeof email !== 'string') {
+    return res.json({ status: 'error', error: 'Invalid email'})
   }
 
   if (!plainTextPassword || typeof plainTextPassword !== 'string') {
@@ -20,17 +18,24 @@ router.post('/register', async (req, res) => {
     return res.json({ status: 'error', error: 'Password too small. Should ve at least 6 characters'})
   }
 
+  if (!email || typeof email !== 'string' || name.length < 3 ) {
+    return res.json({ status: 'error', error: 'Name invalid'})
+  }
+
   const password = await bcrypt.hash(plainTextPassword, 10)
 
   try {
     const response = await User.create({
-      username,
-      password
+      email,
+      password,
+      name
     })
+
     console.log('User create successfully: ', response)
+
   } catch (err) {
-    if (err.core === 11000) {
-      return res.json({ status: 'error', error: 'Username already in use'})
+    if (err.code === 11000) {
+      return res.json({ status: 'error', error: 'email already in use'})
     }
     throw err
   }
@@ -39,31 +44,31 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body
-  const user = await User.findOne({ username }).lean()
+  const { email, password } = req.body
+  const user = await User.findOne({ email }).lean()
 
   if (!user) {
-    return res.json({ status: 'error', error: 'Invalid username/password'})
+    return res.json({ status: 'error', error: 'Invalid email/password'})
   }
 
   if (await bcrypt.compare(password, user.password)) {
     const token = jwt.sign(
       { 
         id: user._id, 
-        username: user.username 
-      }, JWT_SECRET)
+        email: user.email 
+      }, process.env.JWT_SECRET)
 
     return res.json({ status: 'ok', data: token })
   }
 
-  res.json({ status: 'ok', data: 'Invalid username/password'})
+  res.json({ status: 'ok', data: 'Invalid email/password'})
 })
 
 router.post('/change-password', async (req, res) => {
   const { token, newPassword: plainTextPassword } = req.body
 
   try {
-    const user = jwt.verify(token, JWT_SECRET)
+    const user = jwt.verify(token, process.env.JWT_SECRET)
 
     const _id = user.id
 
