@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
     return res.json({ status: 'error', error: 'Password too small. Should ve at least 6 characters'})
   }
 
-  if (!email || typeof email !== 'string' || name.length < 3 ) {
+  if (!name || typeof name !== 'string' || name.length < 3 ) {
     return res.json({ status: 'error', error: 'Name invalid'})
   }
 
@@ -26,9 +26,9 @@ router.post('/register', async (req, res) => {
 
   try {
     const response = await User.create({
+      name,
       email,
-      password,
-      name
+      password
     })
 
     console.log('User create successfully: ', response)
@@ -37,6 +37,8 @@ router.post('/register', async (req, res) => {
     if (err.code === 11000) {
       return res.json({ status: 'error', error: 'email already in use'})
     }
+    console.log(err)
+
     throw err
   }
 
