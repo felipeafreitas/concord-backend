@@ -104,6 +104,7 @@ router.get('/user', async (req, res) => {
 
     return res.json({ status: 'ok', user: data });
   } catch (err) {
+    console.log(err);
     res.json({ status: 'error', error: 'Invalid token' });
   }
 });
