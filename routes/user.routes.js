@@ -33,13 +33,10 @@ router.post('/register', async (req, res) => {
       email,
       password,
     });
-
-    console.log('User create successfully: ', response);
   } catch (err) {
     if (err.code === 11000) {
       return res.json({ status: 'error', error: 'email already in use' });
     }
-    console.log(err);
 
     throw err;
   }
