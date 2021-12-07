@@ -95,6 +95,8 @@ router.post('/edit-profile', async (req, res) => {
 router.get('/user', async (req, res) => {
   const { token } = req.body;
 
+  console.log('req body', req.body);
+
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
 
