@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    return res.json({ status: 'ok', data: token });
+    return res.json({ status: 'ok', token: token });
   }
 
   res.json({ status: 'ok', data: 'Invalid email/password' });
@@ -105,7 +105,7 @@ router.get('/user', async (req, res) => {
 
     const data = await User.findOne({ _id });
 
-    return res.json({ status: 'ok', data: data });
+    return res.json({ status: 'ok', user: data });
   } catch (err) {
     res.json({ status: 'error', error: 'Invalid token' });
   }
