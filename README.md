@@ -8,16 +8,20 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://concord-sincopeiro.netlify.app/">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
-      Solution
+    <a href="https://github.com/sincopeiro/concord">
+      Client Repository
     </a>
     <span> | </span>
     <a href="https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw">
-      Challenge
+      Challenge 1
+    </a>
+   <span> | </span>
+    <a href="https://devchallenges.io/challenges/UgCqszKR7Q7oqb4kRfI0">
+      Challenge 2
     </a>
   </h3>
 </div>
