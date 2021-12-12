@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Room = require('../model/Room');
-const Message = require('../model/Message');
+const Messages = require('../model/Message');
 
 router.get('/chat/rooms', async (req, res) => {
   try {
@@ -26,7 +26,14 @@ router.get('/chat/:room/messages', async (req, res) => {
   const room = req.params.room;
 
   try {
-    const messages = await Messages.find({ room });
+    const messages = await Messages.find({
+      room: {
+        $regex: `^${room}$`,
+        $options: 'i',
+      },
+    });
+
+    console.log(messages);
 
     res.json({ status: 'ok', data: messages });
   } catch (err) {

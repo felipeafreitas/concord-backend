@@ -43,11 +43,15 @@ io.on('connection', (socket) => {
     );
   });
 
-  socket.on('send-message', (message, room) => {
-    socket.to(room).emit('receive-message', message);
-    const newMessage = Message.create({ ...req.body }).then((response) =>
-      console.log(response)
-    );
+  socket.on('send-message', async (message) => {
+    try {
+      const newMessage = await Message.create({ ...message });
+      socket.to(message.room).emit('receive-message', message);
+
+      console.log('New Message: ', newMessage);
+    } catch (err) {
+      console.log('Erro: ', err);
+    }
   });
 });
 
