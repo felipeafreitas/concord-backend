@@ -32,21 +32,25 @@ app.use('/', chatRouter);
 io.on('connection', (socket) => {
   console.log(`New WS Connection: ${socket.id}`);
 
-  socket.on('join-room', ({ user, room }) => {
+  socket.on('join-room', async ({ user, room }) => {
     console.log('Room Connected: ', room);
     socket.join(room);
-    Room.updateOne(
-      { room },
-      {
-        $push: { participants: user },
-      }
+    console.log(user);
+    const update = await Room.updateOne(
+      { name: room },
+      { $addToSet: { participants: user } }
     );
+    console.log(update);
   });
 
   socket.on('send-message', async (message) => {
     console.log('MENSAGEM RECEBIDA NO SERVIDOR');
     try {
-      const newMessage = await Message.create({ ...message });
+      const { room, ...rest } = message;
+      const newMessage = await Message.create({
+        room: room.toLowerCase(),
+        ...rest,
+      });
       socket.to(message.room.toLowerCase()).emit('received-message', message);
 
       console.log('New Message: ', newMessage);

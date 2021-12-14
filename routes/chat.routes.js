@@ -27,13 +27,8 @@ router.get('/chat/:room/messages', async (req, res) => {
 
   try {
     const messages = await Messages.find({
-      room: {
-        $regex: `^${room}$`,
-        $options: 'i',
-      },
+      room: room.toLowerCase(),
     });
-
-    console.log(messages);
 
     res.json({ status: 'ok', data: messages });
   } catch (err) {
