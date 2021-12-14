@@ -27,13 +27,13 @@ const userRouter = require('./routes/user.routes');
 app.use('/', userRouter);
 
 const chatRouter = require('./routes/chat.routes');
-const req = require('express/lib/request');
 app.use('/', chatRouter);
 
 io.on('connection', (socket) => {
   console.log(`New WS Connection: ${socket.id}`);
 
   socket.on('join-room', ({ user, room }) => {
+    console.log('Room Connected: ', room);
     socket.join(room);
     Room.updateOne(
       { room },
@@ -44,9 +44,10 @@ io.on('connection', (socket) => {
   });
 
   socket.on('send-message', async (message) => {
+    console.log('MENSAGEM RECEBIDA NO SERVIDOR');
     try {
       const newMessage = await Message.create({ ...message });
-      socket.to(message.room).emit('receive-message', message);
+      socket.to(message.room.toLowerCase()).emit('received-message', message);
 
       console.log('New Message: ', newMessage);
     } catch (err) {
