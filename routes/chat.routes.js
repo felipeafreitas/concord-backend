@@ -1,13 +1,17 @@
 const router = require('express').Router();
 const Room = require('../model/Room');
-const Messages = require('../model/Message');
+const Message = require('../model/Message');
+const User = require('../model/User');
 
 router.get('/chat/rooms', async (req, res) => {
   try {
-    const rooms = await Room.find();
+    const rooms = await Room.find().populate('participants', 'name photo');
+
+    console.log(rooms);
 
     res.json({ status: 'ok', data: rooms });
   } catch (err) {
+    console.log(err);
     res.json({ status: 'error', error: err });
   }
 });
@@ -26,7 +30,7 @@ router.get('/chat/:room/messages', async (req, res) => {
   const room = req.params.room;
 
   try {
-    const messages = await Messages.find({
+    const messages = await Message.find({
       room: room.toLowerCase(),
     });
 
