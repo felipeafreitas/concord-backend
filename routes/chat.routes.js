@@ -7,8 +7,6 @@ router.get('/chat/rooms', async (req, res) => {
   try {
     const rooms = await Room.find().populate('participants', 'name photo');
 
-    console.log(rooms);
-
     res.json({ status: 'ok', data: rooms });
   } catch (err) {
     console.log(err);
@@ -36,6 +34,7 @@ router.get('/chat/:room/messages', async (req, res) => {
 
     res.json({ status: 'ok', data: messages });
   } catch (err) {
+    console.log(err);
     res.json({ status: 'error', error: err });
   }
 });
