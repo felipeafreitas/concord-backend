@@ -29,7 +29,7 @@ router.get('/chat/:room/messages', async (req, res) => {
 
   try {
     const messages = await Message.find({
-      room: room.toLowerCase(),
+      room: room,
     }).populate('author', 'name photo');
 
     res.json({ status: 'ok', data: messages });
