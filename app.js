@@ -44,11 +44,8 @@ io.on('connection', (socket) => {
 
   socket.on('send-message', async (message) => {
     try {
-      const { room, ...rest } = message;
-      const newMessage = await Message.create({
-        room: room,
-        ...rest,
-      });
+      // const { room, ...rest } = message;
+      const newMessage = await Message.create(message);
       socket.to(message.room).emit('received-message', message);
 
       console.log('New Message: ', newMessage);
