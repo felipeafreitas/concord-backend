@@ -17,11 +17,11 @@
     </a>
     <span> | </span>
     <a href="https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw">
-      Challenge 1
+      Authentication Challenge
     </a>
    <span> | </span>
     <a href="https://devchallenges.io/challenges/UgCqszKR7Q7oqb4kRfI0">
-      Challenge 2
+      Group Chat Challenge
     </a>
   </h3>
 </div>
@@ -43,13 +43,6 @@
 
 ![Demo](https://s10.gifyu.com/images/Peek-2022-01-05-19-38.gif)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
-
-- Where can I see your demo?
-- What was your experience?
-- What have you learned/improved?
-- Your wisdom? :)
-
 ### Built With
 
 <!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
@@ -66,30 +59,6 @@ Introduce your projects by taking a screenshot or a gif. Try to tell visitors a 
 <!-- List the features of your application or follow the template. Don't share the figma file here :) -->
 
 This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw) was to build an application to complete the given user storie.
-
-## How To Use
-
-<!-- Example: -->
-
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
-
-```bash
-# Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
-
-# Install dependencies
-$ npm install
-
-# Run the app
-$ npm start
-```
-
-## Acknowledgements
-
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example -->
-
-- [Node.js Register & Login Tutorial - Learn how to authenticate with Node.js, MongoDB and JWT
-](https://www.youtube.com/watch?v=b91XgdyX-SM)
 
 ## Contact
 
